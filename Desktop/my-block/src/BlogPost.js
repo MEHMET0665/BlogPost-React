@@ -44,7 +44,7 @@ export class BlogPost extends React.Component{
       <div key={'post_' + index}>
         <h1 className={(myBlogPost.published ? 'green' : 'red') + ' blog-title'}>{myBlogPost.title}</h1>
         <p>{myBlogPost.body}</p>
-        <button onClick={publishThePost}>{myBlogPost.published ? 'Unpublish' : 'Publish'}</button>
+        {this.props.isAdmin ? <button onClick={publishThePost}>{myBlogPost.published ? 'Unpublish' : 'Publish'}</button> : <button>Read More</button>}
         <img src="" alt="" />
         <hr/>
       </div>
