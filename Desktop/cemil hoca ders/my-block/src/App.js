@@ -1,5 +1,5 @@
-import './App.css';
 import React from "react";
+import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
@@ -7,14 +7,12 @@ import {
   Link
 } from "react-router-dom";
 import Posts from "./components/Posts.js";
-import CreatePost  from "./components/CreatePost";
+import CreatePost from "./components/CreatePost.js";
 
-
-
-class App extends React.Component{
-  constructor(props){
+class App extends React.Component {
+  constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       posts: [ 
         {
           title: 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
@@ -38,48 +36,67 @@ class App extends React.Component{
         },
         
       ],
-      title:'',
-      body:""
+      title: '',
+      body: ''
     }
-    this.setfields=this.setfields.bind(this)
+    this.setFields = this.setFields.bind(this)
+    this.storeBlogPost = this.storeBlogPost.bind(this)
   }
-  //store input value in this state
-  setfields(key, value){
-this.setState({
-  [key]:value
-})
-  }
-  render(){
-  return (
-    <div>
-      <h1 className="text-center">Welcome to my Blog</h1>
 
-      <Router>
-        <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/create-post" setfields={this.setfields}>Create Post</Link>
-              </li>
-            </ul>
-          </nav>
-          {/* A <Switch> looks through its children <Route>s and
-              renders the first one that matches the current URL. */}
-          <Switch>
-            <Route exact path="/">
-              <Posts blogPosts={this.state.posts}/>
-            </Route>
-            <Route exact path="/create-post">
-              <CreatePost/>
-            </Route>
-          </Switch>
-        </div>
-      </Router>
-    </div>
-  );
-}}
+  // Store input values in the state
+  setFields (key, value) {
+    this.setState({
+      [key]: value
+    })
+  }
+
+  storeBlogPost() {
+    const newPost = {
+      id: Date.now(),
+      title: this.state.title,
+      body: this.state.body
+    }
+    const newArray = [...this.state.posts, newPost];
+    this.setState({
+      posts: newArray,
+      title: '',
+      body: ''
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <h1 className="text-center">Welcome to my Blog</h1>
+  
+        <Router>
+          <div>
+            <nav>
+              <ul>
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/create-post">Create Post</Link>
+                </li>
+              </ul>
+            </nav>
+  
+            {/* A <Switch> looks through its children <Route>s and
+                renders the first one that matches the current URL. */}
+            <Switch>
+              <Route exact path="/">
+                <Posts blogPosts={this.state.posts} />
+              </Route>
+              <Route exact path="/create-post">
+                <CreatePost setFields={this.setFields} storePost={this.storeBlogPost} title={this.state.title} body={this.state.body}/>
+              </Route>
+            </Switch>
+          </div>
+        </Router>
+      </div>
+    );
+  }
+}
 
 export default App;
