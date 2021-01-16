@@ -9,6 +9,7 @@ import {
 import Posts from "./components/Posts.js";
 import CreatePost from "./components/CreatePost.js";
 import PostDetails from "./components/PostDetails";
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
@@ -83,9 +84,8 @@ class App extends React.Component {
     );
   }
   componentDidMount(){
-    fetch('https://jsonplaceholder.typicode.com/posts')
-    .then((response) => response.json())
-    .then((json) => this.setState({posts:json})); 
+    axios.get('https://jsonplaceholder.typicode.com/posts')
+    .then((res) => this.setState({posts: res.data}));
   }
 }
 
