@@ -5,10 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {createStore} from'redux';
  function reducer(){
-   return 'state'
+   return 'state 123'
  }
 const store=createStore(reducer);
-
+console.log(store.getState());
+ const action={
+   type:'changeState',
+   payload:{newState:'My new Satet'}
+ }
+ store.dispatch(action)
+ 
 ReactDOM.render(
   <React.StrictMode>
     <App />
