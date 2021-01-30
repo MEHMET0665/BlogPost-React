@@ -4,6 +4,9 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { createStore,combineReducers } from "redux";
+import { Provider } from "react-redux";
+import userReducer from "./reducers/userReducer";
+import productReducer from "./reducers/productReducer";
 
 function reducer(state, action) {
   console.log(action);
@@ -12,17 +15,7 @@ function reducer(state, action) {
   }
   return "State 123";
 }
-function userReducer(state='', action) {
-  switch (action.type) {
-    case 'userUpdate':
-      return action.payload;  
-    default:
-      return state;
-  }  
-}
-function productReducer(state=[], action) {
-  return state;
-}
+
 const rootReducer=combineReducers({
   product:productReducer,
   user:userReducer
@@ -59,7 +52,9 @@ console.log(store.getState());
 
 ReactDOM.render(
   <React.StrictMode>
+    <Provider store={store}>
     <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
