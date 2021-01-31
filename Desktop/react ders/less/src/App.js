@@ -17,12 +17,18 @@ function App(props) {
     </div>
   );
 }
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state,props) => ({
   user: state.user,
 });
 
 const mapDispatchToProps = {
   onUpdateUser: updateUser,
 };
-
+// const mergeProps=(propsFromState, propsFromDispatch, ownProps)=>{
+//   console.log("propsFromState" ,propsFromState);
+//   console.log("propsFromDispatch",propsFromDispatch);
+//   console.log("ownProps",ownProps);
+//   return {}
+// }
+// export default connect(mapStateToProps,mapDispatchToProps,mergeProps)(App);
 export default connect(mapStateToProps,mapDispatchToProps)(App);

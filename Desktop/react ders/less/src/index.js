@@ -53,7 +53,7 @@ console.log(store.getState());
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-    <App />
+    <App count={4}/>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
