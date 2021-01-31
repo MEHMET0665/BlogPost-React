@@ -3,10 +3,11 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { createStore,combineReducers } from "redux";
+import { compose, applyMiddleware,createStore,combineReducers } from "redux";
 import { Provider } from "react-redux";
 import userReducer from "./reducers/userReducer";
 import productReducer from "./reducers/productReducer";
+import thunk from 'redux-thunk'
 
 function reducer(state, action) {
   console.log(action);
@@ -15,7 +16,9 @@ function reducer(state, action) {
   }
   return "State 123";
 }
-
+const allEnancers=compose(
+  applyMiddleware(thunk,logger,xyzMD)
+)
 const rootReducer=combineReducers({
   product:productReducer,
   user:userReducer
